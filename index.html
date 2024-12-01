@@ -1,1 +1,306 @@
-<h1> Welcome to the world of attribute diffusion </h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="AttributeDiffusion">
+  <meta name="keywords" content="diffusion, editing, stylegan">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AttributeDiffusion</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">AttributeDiffusion: Diffusion Driven Diverse Attribute Editing</h1>
+          <h2 class="title is-3">WACV 2025</h1>
+          <h2 class="title is-5">Rishubh Parihar*,  Prasanna Balaji*,  Raghav Magazine,   Sarthak Vora,  Varun Jampani,  R. Venkatesh Babu</h2>
+          <h2 class="title is-4">Indian Insitute of Science, Bangalore</h2>
+          </div>
+
+            <!-- <span class="author-block">
+              Anonymous submission
+            </span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/media-attr-diff/intro-results.jpg"/>
+      <h2 class="subtitle has-text-centered">
+        TLDR: Our method learns a distribution over plausible variations for a given attribute and provides a principled way of exploration. We train a Diffusion Model to represent diverse attribute variations and enables generating diverse variations for a given attribute.
+        Additionally, a coarse-to-fine sampling strategy is proposed that allows for interactive exploration of all plausible attribute variations. 
+      </h2>
+    </div>
+  </div>
+</section>  
+
+
+<section class="hero is-light is-small" style="padding: 40px;">
+  <!--<section class="section">-->
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Image attribute editing is a widely researched area fueled by the recent advancements in deep generative models. 
+              Existing methods treat semantic attributes as binary and do not allow the user to generate multiple variations 
+              of the attribute edits. This limits the applications of editing methods in the real world, e.g., exploring multiple 
+              eyeglass variations on an e-commerce platform. In this paper, we present a technique to generate a collection of diverse 
+              attribute edits and a principled way to explore them. Generation and controlled exploration of attribute variations 
+              is challenging as it requires fine control over the attribute styles while preserving other attributes and the identity 
+              of the subject. Capitalizing on the attribute disentanglement property of the latent spaces of pretrained GANs, we 
+              represent the attribute edits in this space. Next, we train a diffusion model to model these latent directions of edits. 
+              To explore these variations in a controlled manner, we propose a coarse-to-fine sampling strategy. Extensive experiments on 
+              various datasets establish the effectiveness and generalization of the proposed approach for the generation and controlled 
+              exploration of diverse attribute edits. 
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+  </section>
+  
+  <section class="hero is-small" style="padding: 40px;">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="subtitle has-text-centered">
+          Diverse eyeglass variations generated by AttributeDiffusion. The generated eyeglass variations capture diverse eyeglass frames, lens shade and structure.
+        </h2>
+        <img src="./static/media-attr-diff/brad_pitt_diverse_intro.jpg"/>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-light is-small" style="padding: 40px;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-one-fifths">
+          <h2 class="title is-3">Approach</h2>
+          <div class="hero-body">
+            <img src="./static/media-attr-diff/method-fig.jpg"/>
+            <div class="content has-text-justified">
+              <p>
+              The methodology comprises three major stages: 1) <b>Dataset Generation</b> - We create a dataset of edit directions by embedding negative and positive image pairs into the latent space and computing the difference between these directions. 
+              2) <b>Training</b> - We train a DDPM model over the dataset of edit directions for the given attribute employing a denoising objective. 3) <b>Inference</b> - To edit a new image, we first encode it into the latent space and then add an edit direction sampled with iterative denoising in the reverse diffusion process.
+            </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+
+  <section class="hero is-small" style="padding: 40px;">
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Diverse Attribute Editing on 3D Aware GAN</h2>
+          </div>
+        </div>
+      </div>
+      <!--/ 3D aware GANs. -->
+
+    <div class="hero-body">
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item item-hairs">
+            <video poster="" id="hairs" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/media-attr-diff/506_hairs.mp4"
+                      type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered">
+              Hairstyle variations
+            </h2>
+          </div>
+          <div class="item item-hairs">
+            <video poster="" id="hairs" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/media-attr-diff/553_hairs.mp4"
+                      type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered">
+              Hairstyle variations
+            </h2>
+          </div>
+          <div class="item item-smile">
+            <video poster="" id="smile" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/media-attr-diff/267_smile.mp4"
+                      type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered">
+              Smile variations
+            </h2>
+          </div>
+          <div class="item item-smile">
+            <video poster="" id="smile" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/media-attr-diff/297_smile.mp4"
+                      type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered">
+              Smile variations
+            </h2>
+          </div>
+          <div class="item item-eyeg">
+            <video poster="" id="eyeg" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/media-attr-diff/148_eyeg.mp4"
+                      type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered">
+              Eyeglasses variations 
+            </h2>
+          </div>
+          <div class="item item-eyeg">
+            <video poster="" id="eyeg" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/media-attr-diff/184_eyeg.mp4"
+                      type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered">
+              Eyeglasses variations 
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="subtitle has-text-centered">
+          Coarse-to-fine sampling for diverse eyeglass styles. First two coarse edits are generated with oval cooling glasses and other rectangular framed glasses. 
+        </h2> 
+        <video poster="" id="eyeg" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/media-attr-diff/eg3d-hierarchy.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="subtitle has-text-centered">
+          Edited image variations and surface maps of edited geometry generated by editing on 3D aware GAN. Observe the variations in shape in the eyeglass and hair regions of the edited geometry.
+        </h2> 
+        <img src="./static/media-attr-diff/eg3d-edit-stack.jpg"/>
+      </div>
+    </div>
+
+
+  </section>
+
+<section class="hero is-light is-small" style="padding: 40px;">
+    <!--<section class="section">-->
+      <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Attribute variations with StyleGANs</h2>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->  
+
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <h2 class="subtitle has-text-centered">
+          </h2>
+          <img src="./static/media-attr-diff/addn_face_editing.jpg"/> 
+        </div>
+      </div>
+
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+        Attribute edits by AttributeDiffusion on Cars and Churches. Diverse styles of churches are generated following the same layout. For Cars
+        we generate diverse styles for the sports car variations and classic car variations. 
+      </h2>
+      <img src="./static/media-attr-diff/church_car.jpg"/> 
+    </div>
+  </div>
+</section>
+
+<section class="hero" style="padding: 40px;">
+  <div class="container is-max-desktop">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3"> Coarse-to-fine exploration of attribute edits</h2>
+        </div>
+      </div>
+    </div>
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+        Hierarchical attribute exploration - For a source image, first two set of coarse edits are generated next fine variations 
+        of the generated coarse edits are sampled. Such a coarse-to-fine sampling startegy helps in exploring multiple attribute variations in a principled way. 
+      </h2>
+      <img src="./static/media-attr-diff/addn_stack_hierarchy.jpg"/>
+    </div>
+  </div>
+</section>   
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
